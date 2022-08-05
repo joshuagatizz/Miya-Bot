@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "A simple and pretty Discord bot",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js"
@@ -20,8 +19,12 @@
   },
   "homepage": "https://github.com/joshuagatizz/miya-bot#readme",
   "dependencies": {
+    "@discordjs/rest": "^1.0.1",
     "discord.js": "^14.1.2",
     "dotenv": "^16.0.1",
     "nodemon": "^2.0.19"
+  },
+  "devDependencies": {
+    "eslint": "^8.21.0"
   }
 }
