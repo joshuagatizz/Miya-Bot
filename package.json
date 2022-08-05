@@ -1,0 +1,27 @@
+{
+  "name": "miya-bot",
+  "version": "1.0.0",
+  "description": "A simple and pretty Discord bot",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joshuagatizz/miya-bot.git"
+  },
+  "keywords": [],
+  "author": "Joshua Erlangga Sakti",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joshuagatizz/miya-bot/issues"
+  },
+  "homepage": "https://github.com/joshuagatizz/miya-bot#readme",
+  "dependencies": {
+    "discord.js": "^14.1.2",
+    "dotenv": "^16.0.1",
+    "nodemon": "^2.0.19"
+  }
+}
