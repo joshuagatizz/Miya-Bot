@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require('discord.js');
+const _ = require('lodash');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -9,6 +10,7 @@ module.exports = {
 				.setDescription('Given question')
 				.setRequired(true)),
 	async execute(interaction) {
-		await interaction.reply('Yes');
+		const ans = _.sample(['yes', 'no']);
+		await interaction.reply(ans);
 	},
 };
