@@ -1,5 +1,2 @@
 node_modules
 .env
-
-# Test file
-commands/test.js
