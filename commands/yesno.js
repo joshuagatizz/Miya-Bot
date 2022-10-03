@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const _ = require('lodash');
 
 module.exports = {
@@ -10,7 +10,16 @@ module.exports = {
 				.setDescription('Given question')
 				.setRequired(true)),
 	async execute(interaction) {
-		const ans = _.sample(['yes', 'no']);
-		await interaction.reply(ans);
+		const q = interaction.options.getString('question');
+		const a = _.sample(['Yes', 'No']);
+
+		const embedQuestion = new EmbedBuilder()
+			.setColor('White')
+			.setTitle(`Q: ${q}`);
+		const embedAnswer = new EmbedBuilder()
+			.setColor(a === 'Yes' ? 'Green' : 'Red')
+			.setTitle(`A: ${a}`);
+
+		await interaction.reply({ embeds: [embedQuestion, embedAnswer] });
 	},
 };

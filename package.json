@@ -6,8 +6,8 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "register": "node deploy-commands.js",
-    "delete": "node delete-commands.js"
+    "register": "node deployCommands.js",
+    "delete": "node deleteCommands.js"
   },
   "repository": {
     "type": "git",

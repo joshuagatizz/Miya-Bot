@@ -1,4 +1,5 @@
-const { SlashCommandBuilder, bold } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, bold } = require('discord.js');
+const wait = require('node:timers/promises').setTimeout;
 const _ = require('lodash');
 
 module.exports = {
@@ -11,27 +12,40 @@ module.exports = {
                 .setDescription('Your weapon of choice')
                 .setRequired(true)
                 .addChoices(
-                    { name: 'Rock 🪨', value: 'rock' },
-                    { name: 'Paper 📃', value: 'paper' },
-                    { name: 'Scissors ✂️', value: 'scissors' },
-                    { name: 'Choose for me 😵‍💫', value: 'random' },
+                    { name: 'Rock 🪨', value: 'Rock' },
+                    { name: 'Paper 📃', value: 'Paper' },
+                    { name: 'Scissors ✂️', value: 'Scissors' },
+                    { name: 'Choose for me 😵‍💫', value: 'Random' },
                 )),
 	async execute(interaction) {
-        const options = ['rock', 'paper', 'scissors'];
+        const options = ['Rock', 'Paper', 'Scissors'];
         const botChoice = _.sample(options);
         let userChoice = interaction.options.getString('weapon');
-        if (userChoice === 'random') userChoice = _.sample(options);
+        if (userChoice === 'Random') userChoice = _.sample(options);
 
-        const winResult = 'you win! ✨';
-        const loseResult = 'you lose! 🌧️';
-        let result = 'draw 🤝';
+        const winResult = 'You win! ✨';
+        const loseResult = 'You lose! 🌧️';
+        let result = 'Draw 🤝';
 
-        if (userChoice === 'rock' && botChoice === 'scissors') result = winResult;
-        else if (userChoice === 'rock' && botChoice === 'paper') result = loseResult;
-        else if (userChoice === 'paper' && botChoice === 'rock') result = winResult;
-        else if (userChoice === 'paper' && botChoice === 'scissors') result = loseResult;
-        else if (userChoice === 'scissors' && botChoice === 'paper') result = winResult;
-        else if (userChoice === 'scissors' && botChoice === 'rock') result = loseResult;
-        await interaction.reply(`your pick: ${userChoice}\nmy pick  : ${botChoice}\n\n${bold(result)}`);
+        if (userChoice === 'Rock' && botChoice === 'Scissors') result = winResult;
+        else if (userChoice === 'Rock' && botChoice === 'Paper') result = loseResult;
+        else if (userChoice === 'Paper' && botChoice === 'Rock') result = winResult;
+        else if (userChoice === 'Paper' && botChoice === 'Scissors') result = loseResult;
+        else if (userChoice === 'Scissors' && botChoice === 'Paper') result = winResult;
+        else if (userChoice === 'Scissors' && botChoice === 'Rock') result = loseResult;
+
+        const embedInfo = new EmbedBuilder()
+            .setColor('Random')
+            .setTitle(`Your weapon: ${userChoice}`)
+            .addFields({ name: '\u200b', value: 'Initiating battle...' });
+
+        const embedResult = new EmbedBuilder()
+            .setColor('Gold')
+            .setTitle(`${userChoice} vs ${botChoice}`)
+            .setDescription(bold(result));
+
+        await interaction.reply({ embeds: [embedInfo] });
+        await wait(3000);
+        await interaction.followUp({ embeds: [embedResult] });
 	},
 };
